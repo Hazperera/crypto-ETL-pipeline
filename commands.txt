@@ -1,8 +1,9 @@
 -- Build the Docker Image
-docker build -t my-python-app .
+docker build -t df-bq-python-crypto-pipeline .
 
 -- Run the Docker Container
-docker run 
+docker run -v /Users/hasaniperera/Documents/haz_keys/df-bq-crypto-sa.json -e GOOGLE_APPLICATION_CREDENTIALS=/Users/hasaniperera/Documents/haz_keys/df-bq-crypto-sa.json your_docker_image
+
 
 
 

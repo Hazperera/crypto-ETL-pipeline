@@ -1,8 +1,10 @@
-version: '^3.12'
+version: ''
 services:
   python-app:
     build: .
     volumes:
-      - /path/to/your/service-account-file.json:/tmp/keys/key.json
+          - /Users/hasaniperera/Documents/haz_keys/df-bq-crypto-sa.json:/tmp/keys/service-account.json
+
     environment:
-      - GOOGLE_APPLICATION_CREDENTIALS=/tmp/keys/key.json
+      - GOOGLE_APPLICATION_CREDENTIALS=/tmp/keys/service-account.json
+

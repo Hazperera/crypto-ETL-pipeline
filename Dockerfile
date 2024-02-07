@@ -6,5 +6,5 @@ COPY . .
 
 RUN poetry install
 
-ENTRYPOINT ["poetry", "run", "python", "-m", "code.etl"]
+ENTRYPOINT ["poetry", "run", "python", "-m", "main"]
 

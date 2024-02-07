@@ -1,0 +1,4 @@
+--Initialize a Python Environment
+poetry init 
+
+poetry shell 

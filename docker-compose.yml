@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  python-app:
+    build: .
+    volumes:
+      - /path/to/your/service-account-file.json:/tmp/keys/key.json
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/tmp/keys/key.json

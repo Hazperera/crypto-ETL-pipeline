@@ -4,11 +4,24 @@ FROM python:3.8-slim
 # Set the working directory in the container
 WORKDIR /usr/src/app
 
-# Copy the current directory contents into the container at /usr/src/app
-COPY . .
+# Copy only the necessary files for installing dependencies
+COPY pyproject.toml poetry.lock* ./
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Poetry
+RUN pip install --no-cache-dir poetry
+
+# Configure Poetry:
+# Disable the creation of virtual environments because
+# the Docker container itself provides isolation
+RUN poetry config virtualenvs.create false
+
+# Install project dependencies
+# This step uses pyproject.toml and poetry.lock to install dependencies
+RUN poetry install --no-dev
+
+# Copy the rest of your application's code
+# COPY 
 
 # Run the Python script on container startup
-CMD ["python", "./crypto_zillqa_pipeline.py"]
+CMD ["python", "./main.py"]
+

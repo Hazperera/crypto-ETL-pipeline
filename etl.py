@@ -1,8 +1,13 @@
 # from google.cloud import bigquery
+# from google.cloud.exceptions import GoogleCloudError
+# import logging
+
+
+# def extract_transform():
 
 # client = bigquery.Client()
 
-# # Perform a query - summary of daily transaction volumes
+#summary of daily transaction volumes
 
 # QUERY = (
 #     'CREATE TABLE datafella-workbook.dbt_hp.crypto_daily_transaction_summary AS'
@@ -17,6 +22,10 @@
 
 # for row in rows:
 #     print(row.name)
+
+
+# def load_data_to_parquet(df, output_file):
+
 
 
 

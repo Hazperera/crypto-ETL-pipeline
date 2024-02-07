@@ -1,4 +1,8 @@
---Initialize a Python Environment
-poetry init 
+-- Build the Docker Image
+docker build -t my-python-app .
 
-poetry shell 
+-- Run the Docker Container
+docker run 
+
+
+

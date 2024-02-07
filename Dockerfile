@@ -1,27 +1,28 @@
-# Use an official Python runtime as a parent image
-FROM python:3.12
+# Stage 1: Install Poetry
+# Use an intermediate image to install poetry
+FROM python:3.12-slim as poetry-base
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends curl \
+    && curl -sSL https://install.python-poetry.org | python -
 
-# Set the working directory in the container
-WORKDIR /usr/src/app
+# Stage 2: Build the application image
+FROM python:3.12-slim as builder
+WORKDIR /app
 
-# Copy only the necessary files for installing dependencies
+# Copy only files necessary for installing dependencies
+COPY --from=poetry-base /usr/local/bin/poetry /usr/local/bin/poetry
 COPY pyproject.toml poetry.lock* ./
 
-# Install Poetry
-RUN pip install --no-cache-dir poetry
+# Disable creation of virtual environments and install dependencies
+RUN poetry config virtualenvs.create false \
+    && poetry install --no-dev
 
-# Configure Poetry:
-# Disable the creation of virtual environments because
-# the Docker container itself provides isolation
-RUN poetry config virtualenvs.create false
+# Stage 3: Run the application
+FROM python:3.12-slim as runtime
+# WORKDIR /app
 
-# Install project dependencies
-# This step uses pyproject.toml and poetry.lock to install dependencies
-RUN poetry install --no-dev
+# Copy installed packages from the builder image
+COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
+# COPY . .
 
-# Copy the rest of your application's code
-# COPY 
-
-# Run the Python script on container startup
-CMD ["python", "./main.py"]
-
+# CMD ["python", "./main.py"]

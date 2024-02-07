@@ -19,10 +19,11 @@ RUN poetry config virtualenvs.create false \
 
 # Stage 3: Run the application
 FROM python:3.12-slim as runtime
-# WORKDIR /app
+WORKDIR /app
 
 # Copy installed packages from the builder image
 COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
-# COPY . .
+COPY . .
 
-# CMD ["python", "./main.py"]
+
+CMD ["python", "./etl.py"]

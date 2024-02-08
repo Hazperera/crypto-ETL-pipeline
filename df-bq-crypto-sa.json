@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "datafella-workbook",
+  "private_key_id": "b7a73dcaeb1c6874d5a39bbc89fff055f13f0092",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCbPhtA8pGgE36C\ndnwFdYxFKQGO00m01YXrDIhJjVO/GU4zBUhl/NnNN2ACDp+jWx9ZcSm7uOq0PsUD\nJkwqnpTGznvZt2bEWVPmf60uslaQ0BOYSd9gGERGOXAV/1/kAjgOe+9gaYwFBRyW\noPyu+BhKiqvcDEbvTlMhrXwACk4zUAhhzRmAX5t3MGI0c0rKeoaKvsvorWAbQFtq\neH2TX3nbA8DvFUkz5dh3iwJQQB1sH92Po+7JYdltyhNgTRQp5bEXIEEXvtcwBZI4\nsAGA3NbpvwAxXBaXYP65/v9KZThazLSg4MOZCwEFpyqrTs6PVrstfP51AOrMS4gB\nrYNlaPCZAgMBAAECggEAG7/Bul3BhwYFBofsSkOFM7WNODzvP1otamLel5sh/ZYl\n4rvOgaBtRB/iUuvPQDFhDKlMJuh6V4aiy5nUYoffGxw8iiGcxnsbIqfuylqJW7A9\n2GpX+cLMrWrF7MCtoMF+yKQBmU+0fg84WXpkQFhLa0OXTamKImtzM6FheVZePRCJ\na96m513j6jA1d1+HtswnUKUy/z+IvtnUl+bOmfHw4egdXYrOwpaSKYAHo41NZjQ7\nJwCWikYkv9SCCvOh3UQqOGI9aWIDqW2l8hHp5KIvoUFBrUcw0LEfK12bbC8aBKgq\n5/yixgNquw5NUvjVV8Q7TiElbob6urggWklPsMwUCQKBgQDMrtsGw5zTSIrPHrR7\nfKt2FK4bnZGPGWTrUkbqoJakDgg7dDkO4h8L2mbPxJpO4qx7mIZUlTcL0gYBilqW\n7bYhQGZD7JiFnfET81aF8/tNi54uIopu7ZpFICn0xhGCOBN9NTSB1lYaDlzGUSuj\nmJ/xsoeiX1nu3GYdxLk5/BhOvQKBgQDCKgW8MrJMZ1TYYTzNhtOvDf/pxMPbcdew\n9fk/RxUg73/yOq80F/IS/Z6NAVnCLcM0cJqDwKhksQjP1vs+1dippXsnhHn7nLGn\nWapL+Yie8CpDPDM9FmCeYgjnS0SCE1WyA5W7PVUBOSfVbQEUrqEg/qWxO2URsAtI\n/YK6EARFDQKBgQDEH1dnJ9AA8yVuSHGPUWnJfw9FDroGb8KvaOrirnUpRPjGXxq9\nFBXDecXBlxR0OeYjl4Y/Taqs/NUcbMFYlPVK7zYOJ4oNncT95NAnEhzdtMYgVqBm\noeyMB8Gr9I2aRLkH5A8nyYQ++zwSGnzCCOBY60PjZZH6udxu8ay5zsBL0QKBgQCV\nlb5ZYU1P44PQOAmZ5beL8+Mm/DpQBALCCJ5/i4nRl/Igcems3o3W56GQzGuUV6E9\n80p3GqQg/urlBKEHpcSH3j9lEIDRwcR0Q3YZliMVH73Pkr9+3pCNNMXbO3eKJs8s\nl+pxGC03BguUN6hPgMIOI2EPi8yvtcrb7sMaCWDguQKBgDySnO98u7nc25RaZn40\ngAkUU5MMGisdiK3FI/eJz9TUPS8lHJJHOciJjyHSCNc5TIMtYV9pcTPBcvxCUKeN\nt5KvFOXMrl81aiEZdbMmDZwNptfabQ76E3+OfZfP9UnHf1vv4XECuMYM5yYExkWq\nu/P9UkThM7GHHD7B0Ex6vV74\n-----END PRIVATE KEY-----\n",
+  "client_email": "bq-crypto-data-pipeline-sa@datafella-workbook.iam.gserviceaccount.com",
+  "client_id": "112859302952721726520",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/bq-crypto-data-pipeline-sa%40datafella-workbook.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

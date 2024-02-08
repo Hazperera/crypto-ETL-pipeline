@@ -1,10 +1,19 @@
 FROM python:3.12-slim
 
+# Install Poetry
 RUN pip install poetry
 
-COPY . .
+# Copy project files
+COPY . /app
 
-RUN poetry install
+# Set working directory
+WORKDIR /app
 
-ENTRYPOINT ["poetry", "run", "python", "-m", "main"]
+# Install project dependencies including google-cloud-bigquery
+RUN poetry config virtualenvs.create false && \
+    poetry install --no-dev && \
+    poetry add google-cloud-bigquery
+
+# Run the script
+CMD ["poetry", "run", "python", "bq-to-parquet.py"]
 

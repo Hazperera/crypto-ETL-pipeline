@@ -12,7 +12,9 @@ WORKDIR /app
 # Install project dependencies including google-cloud-bigquery
 RUN poetry config virtualenvs.create false && \
     poetry install --no-dev && \
-    poetry add google-cloud-bigquery
+    poetry add google-cloud-bigquery && \
+    poetry add pandas
+
 
 # Run the script
 CMD ["poetry", "run", "python", "bq-to-parquet.py"]

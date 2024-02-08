@@ -1,11 +1,13 @@
 -- Build the Docker Image
 docker build -t df-bq-python-crypto-pipeline .
 docker-compose build
+
 -- Verify
 docker images
 
 -- Run the Docker Container
 --docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
 docker-compose up
 docker run -v df-bq-crypto-sa.json -e GOOGLE_APPLICATION_CREDENTIALS=/Users/hasaniperera/Documents/haz_keys/df-bq-crypto-sa.json df-bq-python-crypto-pipeline
 

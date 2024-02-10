@@ -15,10 +15,12 @@ docker run -v df-bq-crypto-sa.json -e GOOGLE_APPLICATION_CREDENTIALS=/Users/hasa
 docker logs my-etl-container
 
 
+HASA Local Development
+
 Step01 : Open new terminal
 Step02 : poetry shell 
 Step03 : export GOOGLE_APPLICATION_CREDENTIALS=df-bq-crypto-sa.json
 Step04 : python bq-to-parquet.py
 
 
-
+ 

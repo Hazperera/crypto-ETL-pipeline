@@ -13,7 +13,7 @@ def main():
         table_id = "public-data-finance.crypto_zilliqa.transactions"
 
         # Initialize variables for pagination
-        max_results = 20  # Set the number of rows to fetch per page
+        max_results = 100  # Set the number of rows to fetch per page
         page_token = None
         all_rows = []
 
@@ -22,8 +22,13 @@ def main():
             rows_iter = client.list_rows(table_id, max_results=max_results, page_token=page_token)
             rows = list(rows_iter)
             all_rows.extend(rows)
+
+        # Logging the progress
+            logging.info(f'Processed {len(all_rows)} rows so far.')
+
             page_token = rows_iter.next_page_token
             if not page_token:
+                logging.info('All pages have been processed.')
                 break  # Exit loop if no more pages
 
         # Convert rows to DataFrame
@@ -33,7 +38,7 @@ def main():
         df.to_csv('crypto_zilliqa_pagination_transactions.csv', index=False)
 
         # Log success message
-        logging.info(f'Data written to Parquet file successfully. Total rows: {len(rows)}')
+        logging.info(f'Data written to CSV file successfully. Total rows: {len(rows)}')
 
     except Exception as e:
         # Log error message

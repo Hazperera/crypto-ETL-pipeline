@@ -6,8 +6,9 @@ import pandas as pd
 logging.basicConfig(level=logging.INFO)
 
 def execute_query(query):
-    """Executes a sample query."""
-    client = bigquery.Client()
+    """Executes SQL queries."""
+    # Construct a BigQuery client object.
+    client = bigquery.Client() 
     try:
         query_job = client.query(query)
         return query_job.result()  # Waits for query to finish
@@ -18,7 +19,7 @@ def execute_query(query):
 def main():
     """Main function to execute the data pipeline."""
     try:
-        # Perform a query
+        # Perform queries
         monthly_active_addresses = '''
         WITH all_transactions AS (
             SELECT block_timestamp, amount FROM `public-data-finance.crypto_zilliqa.transactions`

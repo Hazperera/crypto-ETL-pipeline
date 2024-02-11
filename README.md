@@ -9,43 +9,37 @@
 1. **Environment Setup:**
    - Make sure you have Python 3.12 installed on your system.
    - Set up a virtual environment for the project to manage dependencies.
-   - Install Poetry, a dependency management tool, using the following command:
+   - Install Poetry, a dependency management tool:
      ```bash
      pip install poetry
      ```
 
 2. **Clone the Repository:**
+   - Use the following commands to clone the repository and change to the directory:
      ```bash
      git clone <repository_url>
      cd <repository_directory>
-
+     ```
 
 3. **Install Dependencies:**
-   - Run the following command to install project dependencies:
+   - Install project dependencies with Poetry:
      ```bash
      poetry install
+     ```
 
 4. **Run the Data Pipeline:**
-   - Execute the main Python script to run the data pipeline:
+   - To execute the main Python script:
+     - First, activate the Poetry shell:
      ```bash
      poetry shell 
 
+     - Set the environment variable for Google credentials:
      export GOOGLE_APPLICATION_CREDENTIALS=/path/to/your/service-account-key.json
-     
+
+     - Run the script:
      python bq_to_parquet.py
-
-
-### Running with Docker
-1. **Build the Docker image:**
-     ```bash
-     docker build -t project-image .
      ```
-2. **Run the Docker container:**
-     ```bash
-     docker run --rm -e GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/service-account-key.json" project-image
-     ```
-
-
+     
 ## System Architecture Diagram:
 
 ![Workflow](draft_workflow.png)

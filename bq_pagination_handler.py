@@ -10,21 +10,27 @@ def main():
     try:
         # Construct a BigQuery client object.
         client = bigquery.Client()
+        table_id = "public-data-finance.crypto_zilliqa.transactions"
 
-        # TODO: Replace with your table ID
-        table_id = "your-project.your_dataset.your_table_name"
+        # Initialize variables for pagination
+        max_results = 20  # Set the number of rows to fetch per page
+        page_token = None
+        all_rows = []
 
-        # Use client.list_rows for pagination
-        # Fetch rows with a limit
-        max_results = 1000  # Set the number of rows to fetch per page
-        rows_iter = client.list_rows(table_id, max_results=max_results)
-        rows = list(rows_iter)
+        # Continuously fetch pages
+        while True:
+            rows_iter = client.list_rows(table_id, max_results=max_results, page_token=page_token)
+            rows = list(rows_iter)
+            all_rows.extend(rows)
+            page_token = rows_iter.next_page_token
+            if not page_token:
+                break  # Exit loop if no more pages
 
         # Convert rows to DataFrame
         df = pd.DataFrame([dict(row) for row in rows])
 
         # Write DataFrame to Parquet file
-        df.to_parquet('output_filename.parquet', index=False)
+        df.to_csv('crypto_zilliqa_pagination_transactions.csv', index=False)
 
         # Log success message
         logging.info(f'Data written to Parquet file successfully. Total rows: {len(rows)}')

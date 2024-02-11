@@ -20,7 +20,7 @@ HASA Local Development
 Step01 : Open new terminal
 Step02 : poetry shell 
 Step03 : export GOOGLE_APPLICATION_CREDENTIALS=df-bq-crypto-sa.json
-Step04 : python bq-to-parquet.py
+Step04 : python bq_to_parquet.py
 
 
  

@@ -32,32 +32,17 @@
      - First, activate the Poetry shell:
      ```bash
      poetry shell 
-
+     ```
      - Set the environment variable for Google credentials:
+     ```bash
      export GOOGLE_APPLICATION_CREDENTIALS=/path/to/your/service-account-key.json
-
+     ```
      - Run the script:
+     ```bash
      python bq_to_parquet.py
      ```
      
 ## System Architecture Diagram:
 
 ![Workflow](draft_workflow.png)
-
-
-## System Scalability and Edge Cases:
-- Scalability:
-   - BigQuery is highly scalable and can handle large datasets efficiently.
-   - The pipeline can be scaled horizontally by running multiple instances of the data pipeline script to process data in parallel.
-   - Autoscaling can be configured for GCP resources to handle variable workloads.
-- Edge Cases:
-   - Ensure proper error handling to handle potential issues such as network errors, query failures, and data inconsistencies.
-   - Implement retry mechanisms for transient errors.
-   - Monitor resource usage and performance metrics to detect and mitigate any issues in real-time.
-
-## Additional Considerations:
-- Security: Ensure proper access controls and encryption mechanisms are in place to protect sensitive data.
-- Cost Optimization: Monitor resource usage and optimize configurations to minimize costs, especially for BigQuery usage.
-- Data Quality: Implement data validation checks to ensure data integrity and accuracy.
-- Continuous Integration/Continuous Deployment (CI/CD): Set up automated testing and deployment pipelines to streamline development and deployment processes.
 

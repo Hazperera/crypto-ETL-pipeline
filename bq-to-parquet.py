@@ -39,7 +39,7 @@ def main():
         df = pd.DataFrame([dict(row) for row in rows])
 
         # Write DataFrame to Parquet file
-        df.to_parquet('crypto_zilliqa_transactions_new.parquet', index=False)
+        df.to_parquet('crypto_zilliqa_transactions.parquet', index=False)
 
         # Log success message
         logging.info('Data written to Parquet file successfully.')

@@ -30,6 +30,9 @@
 
 ## System Architecture Diagram:
 
+![Workflow](draft_workflow.png)
+
+
 
 
 ## System Scalability and Edge Cases:

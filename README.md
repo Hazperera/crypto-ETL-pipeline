@@ -15,8 +15,3 @@
      ```bash
      docker run --rm -e GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/service-account-key.json" project-image
      ```
-
-## Additional Notes
-Add any additional notes, troubleshooting tips, or caveats here.
-- Replace `<repository_url>` and `<repository_directory>` with the appropriate values.
-- Also, make sure to replace `/path/to/your/service-account-key.json` with the actual path to your service account key file.

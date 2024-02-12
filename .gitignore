@@ -1,1 +1,6 @@
 /Users/hasaniperera/Documents/haz_keys/df-bq-crypto-sa.json
+.DS_Store
+
+# Byte-compile / optimized / DLL files
+__pycache__/
+*.py[cod]

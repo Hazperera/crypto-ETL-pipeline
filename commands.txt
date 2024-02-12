@@ -1,5 +1,5 @@
 -- Build the Docker Image
-docker build -t df-bq-python-crypto-pipeline .
+docker build -t my-docker-image-name .
 docker-compose build
 
 -- Verify
@@ -9,18 +9,9 @@ docker images
 --docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 
 docker-compose up
-docker run -v df-bq-crypto-sa.json -e GOOGLE_APPLICATION_CREDENTIALS=/Users/hasaniperera/Documents/haz_keys/df-bq-crypto-sa.json df-bq-python-crypto-pipeline
+docker run -v df-bq-crypto-sa.json -e GOOGLE_APPLICATION_CREDENTIALS=/Users/hasaniperera/D......df-bq-crypto-sa.json my-docker-image-name
 
 -- Fetch Logs
 docker logs my-etl-container
 
 
-HASA Local Development
-
-Step01 : Open new terminal
-Step02 : poetry shell 
-Step03 : export GOOGLE_APPLICATION_CREDENTIALS=df-bq-crypto-sa.json
-Step04 : python bq_to_parquet.py
-
-
- 

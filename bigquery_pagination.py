@@ -9,58 +9,59 @@ def fetch_data_with_pagination(query, max_results=100):
     """Fetches data from BigQuery with pagination."""
     # Construct a BigQuery client object.
     client = bigquery.Client()
-    # Initialize variables for pagination
-    page_token = None
-    # Initialize an empty list to store all fetched rows
-    all_rows = []
+
+    # Initialize an empty DataFrame to store all fetched rows
+    all_rows = pd.DataFrame()
+
+    # Execute the query
+    query_job = client.query(query)
+
+    # Fetch results with pagination
+    iterator = query_job.result(page_size=max_results)
+    page = iterator.page
 
     # Continuously fetch pages
-    while True:
-        # Execute query and fetch next page of results
-        job_config = bigquery.QueryJobConfig(max_results=max_results, page_token=page_token)
-        query_job = client.query(query, job_config=job_config)
-        page_rows = query_job.to_dataframe()
+    while page is not None:
+        # Convert the current page into a DataFrame
+        page_df = page.to_dataframe()
 
-        # Append fetched rows to all_rows
-        all_rows.append(page_rows)
+        # Append current page to all_rows
+        all_rows = pd.concat([all_rows, page_df])
 
         # Log progress
-        logging.info(f'Processed {len(all_rows)} pages so far.')
+        logging.info(f'Processed {len(page_df)} rows so far.')
 
-        # Check if there are more pages
-        if query_job.next_page_token is None:
+        try:
+            # Fetch next page
+            page = next(iterator.pages)
+        except StopIteration:
+            # Exit loop if no more pages
             logging.info('All pages have been processed.')
-            break  # Exit loop if no more pages
-        else:
-            page_token = query_job.next_page_token
+            break
 
-    # Concatenate all rows into a single DataFrame
-    return pd.concat(all_rows)
+    return all_rows
+
+# Rest of your main function remains the same
+
 
 def main():
     """Main function to execute the data pipeline."""
     try:
         # Perform queries
         monthly_active_addresses = '''
-            WITH all_transactions AS (
-                SELECT block_timestamp, amount FROM `public-data-finance.crypto_zilliqa.transactions`
-                UNION ALL
-                SELECT block_timestamp, amount FROM `public-data-finance.crypto_zilliqa.transitions`
-            )
-            SELECT DATE(block_timestamp) AS date, SUM(amount) / 1e12 AS volume
-            FROM all_transactions
-            GROUP BY date
-            ORDER BY date DESC
-            LIMIT 1000
+        SELECT 
+            DATE(TIMESTAMP_TRUNC(block_timestamp, MONTH, "UTC")) AS month,
+            COUNT(DISTINCT sender) AS active_addresses
+        FROM `public-data-finance.crypto_zilliqa.transactions`
+        GROUP BY month
+        ORDER BY month DESC
         '''
-
-
 
         # Fetch data with pagination
         df = fetch_data_with_pagination(monthly_active_addresses)
 
         # Write DataFrame to Parquet file
-        df.to_parquet('crypto_zilliqa_transactions123.parquet', index=False)
+        df.to_parquet('crypto_zilliqa_transactions_new.parquet', index=False)
 
         # Log success message
         logging.info('Data written to Parquet file successfully.')

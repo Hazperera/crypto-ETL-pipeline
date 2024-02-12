@@ -1,7 +1,7 @@
 import logging
 from google.cloud import bigquery
 import pandas as pd
-from queries import MONTHLY_ACTIVE_ADDRESSES, DAILY_TRANSACTION_VOLUME
+from src.queries import MONTHLY_ACTIVE_ADDRESSES, DAILY_TRANSACTION_VOLUME
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

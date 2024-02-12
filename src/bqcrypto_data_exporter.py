@@ -37,7 +37,7 @@ def query_and_write_to_file(query, filename):
         os.makedirs(output_dir, exist_ok=True)
         
         df = fetch_data_with_pagination(query)
-        df.to_csv(output_path, index=False)
+        df.to_parquet(output_path, index=False)
         logging.info(f'Data written to {output_path} successfully.')
     except Exception as e:
         logging.error(f'An error occurred while processing {output_path}: {e}')
@@ -54,7 +54,7 @@ def main():
         # Process queries and write to files
         for query_name in query_names:
             query = getattr(queries_module, query_name)
-            filename = query_name.lower() + '.csv'
+            filename = query_name.lower() + '.parquet'
             query_and_write_to_file(query, filename)
 
         logging.info('All data written to files successfully.')

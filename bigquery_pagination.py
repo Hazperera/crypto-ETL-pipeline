@@ -9,24 +9,33 @@ def fetch_data_with_pagination(query, max_results=100):
     """Fetches data from BigQuery with pagination."""
     # Construct a BigQuery client object.
     client = bigquery.Client()
+    # Initialize variables for pagination
     page_token = None
+    # Initialize an empty list to store all fetched rows
     all_rows = []
 
     # Continuously fetch pages
     while True:
-        rows_iter = client.query(query, max_results=max_results, page_token=page_token)
-        rows = list(rows_iter)
-        all_rows.extend(rows)
+        # Execute query and fetch next page of results
+        job_config = bigquery.QueryJobConfig(max_results=max_results, page_token=page_token)
+        query_job = client.query(query, job_config=job_config)
+        page_rows = query_job.to_dataframe()
+
+        # Append fetched rows to all_rows
+        all_rows.append(page_rows)
 
         # Log progress
-        logging.info(f'Processed {len(all_rows)} rows so far.')
+        logging.info(f'Processed {len(all_rows)} pages so far.')
 
-        page_token = rows_iter.next_page_token
-        if not page_token:
+        # Check if there are more pages
+        if query_job.next_page_token is None:
             logging.info('All pages have been processed.')
             break  # Exit loop if no more pages
+        else:
+            page_token = query_job.next_page_token
 
-    return all_rows
+    # Concatenate all rows into a single DataFrame
+    return pd.concat(all_rows)
 
 def main():
     """Main function to execute the data pipeline."""
@@ -45,11 +54,10 @@ def main():
             LIMIT 1000
         '''
 
-        # Fetch data with pagination
-        rows = fetch_data_with_pagination(monthly_active_addresses)
 
-        # Convert query result to DataFrame
-        df = pd.DataFrame([dict(row) for row in rows])
+
+        # Fetch data with pagination
+        df = fetch_data_with_pagination(monthly_active_addresses)
 
         # Write DataFrame to Parquet file
         df.to_parquet('crypto_zilliqa_transactions123.parquet', index=False)

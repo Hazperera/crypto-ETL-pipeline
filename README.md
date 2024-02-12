@@ -42,6 +42,6 @@
      
 ## System Architecture Diagram:
 
-![Draft Workflow](images/draft_workflow.png)
+![Draft Workflow](images/system_architecture_diagram.png)
 
 

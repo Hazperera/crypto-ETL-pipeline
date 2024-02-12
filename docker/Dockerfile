@@ -16,5 +16,5 @@ RUN poetry config virtualenvs.create false && \
 
 
 # Run the script
-# CMD ["poetry", "run", "python", "bq_to_parquet.py"]
+# CMD ["poetry", "run", "python", ".py"]
 

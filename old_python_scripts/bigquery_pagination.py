@@ -56,6 +56,16 @@ def main():
         ORDER BY month DESC
         '''
 
+        daily_transaction_volume = '''
+        SELECT 
+            DATE(TIMESTAMP_TRUNC(block_timestamp, DAY)) AS date,
+            SUM(amount) AS total_volume
+        FROM `public-data-finance.crypto_zilliqa.transactions`
+        GROUP BY date
+        ORDER BY date DESC
+        
+        '''
+
         # Fetch data with pagination
         df = fetch_data_with_pagination(monthly_active_addresses)
 

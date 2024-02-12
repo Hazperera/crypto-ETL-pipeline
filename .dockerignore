@@ -7,4 +7,4 @@ node_modules
 *.pyc
 *.pyo
 *.pyd
-/Users/hasaniperera/Documents/haz_keys/df-bq-crypto-sa.json
+/Users/hasaniperera/crypto-analytics-repo/crypto-ETL-pipeline/credentials/df-bq-crypto-sa.json

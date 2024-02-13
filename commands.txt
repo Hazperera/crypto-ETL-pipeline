@@ -42,17 +42,16 @@ aws --endpoint-url=$LOCALSTACK_ENDPOINT_URL s3 ls
 -- Alias on Mac/ Linux
 alias awsls="aws --endpoint-url=$LOCALSTACK_ENDPOINT_URL"
 
+-- List objects a from a bucket 
+aws --endpoint-url=$LOCALSTACK_ENDPOINT_URL s3 ls s3://your-bucket-name
+
 
 -- Create an S3 bucket using AWS CLI in LocalStack
-awsls s3api create-bucket --bucket hands-on-cloud-localstack-bucket
+awsls s3api create-bucket --bucket your-bucket-name
 
--- List S3 buckets in LocalStack
-awsls s3 ls
+-- List S3 buckets in your profile
+aws s3 ls
 
--- Verify S3 bucket creation
-awsls s3 ls
 
--- Schedule using CRON Jobs
-crontab -e
-0 1 * * * /anaconda3/bin/python /Users/hasaniperera/crypto-ETL-pipeline/src/pipeline_executor.py
-crontab -l
+
+

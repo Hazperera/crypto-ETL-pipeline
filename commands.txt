@@ -1,3 +1,5 @@
+--DOCKER
+
 -- Build the Docker Image
 docker build -t my-docker-image-name .
 docker-compose build
@@ -14,6 +16,10 @@ docker run -v df-bq-crypto-sa.json -e GOOGLE_APPLICATION_CREDENTIALS=/Users/hasa
 -- Fetch Logs
 docker logs my-etl-container
 
+
+
+--LOCALSTACK
+
 -- Start LocalStack
 localstack start
 
@@ -22,7 +28,6 @@ localstack stop
 
 -- Configure Environment Variables in Linux
 echo 'LOCALSTACK_ENDPOINT_URL="http://localhost:4566"' >> $HOME/.bash_profile
-
 
 -- Configure AWS CLI
 aws configure --profile localstack
@@ -44,4 +49,5 @@ awsls s3api create-bucket --bucket hands-on-cloud-localstack-bucket
 -- List S3 buckets in LocalStack
 awsls s3 ls
 
--- Configure AWS CDK (Python Boto3 library)
+-- Verify S3 bucket creation
+awsls s3 ls

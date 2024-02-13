@@ -7,3 +7,5 @@ services:
       - GOOGLE_APPLICATION_CREDENTIALS=/app/service-account-key.json
     volumes:
       - ./df-bq-crypto-sa.json:/app/service-account-key.json
+      - ./aws_credentials.json:/app/aws_credentials.json
+    command: python src/crypto_datapipeline_executor.py

@@ -14,38 +14,84 @@ logger = logging.getLogger()
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s: %(levelname)s: %(message)s')
 boto3.setup_default_session(profile_name=AWS_PROFILE)
-# s3_client = boto3.client("s3", region_name=AWS_REGION,
-#                          endpoint_url=ENDPOINT_URL)
 
-######## Hardcoded Credentials (Temporary Test) ########
-s3_client = boto3.client('s3', region_name=AWS_REGION, 
-                         endpoint_url=ENDPOINT_URL, 
-                         aws_access_key_id='test', 
-                         aws_secret_access_key='test')
+s3_client = boto3.client("s3", region_name=AWS_REGION,
+                         endpoint_url=ENDPOINT_URL)
 
-
-def create_bucket(bucket_name):
+def create_bucket(bucket_name, region_name=None):
     """
-    Creates a S3 bucket.
+    Creates an S3 bucket.
     """
     try:
-        response = s3_client.create_bucket(
-            Bucket=bucket_name,
-    CreateBucketConfiguration={'LocationConstraint': AWS_REGION})
+        if region_name is None or region_name == 'us-east-1':
+            response = s3_client.create_bucket(Bucket=bucket_name)
+        else:
+            response = s3_client.create_bucket(
+                Bucket=bucket_name,
+                CreateBucketConfiguration={'LocationConstraint': region_name})
     except ClientError:
         logger.exception('Could not create S3 bucket locally.')
         raise
     else:
         return response
 
+def upload_file(file_name, bucket, object_name=None):
+    """
+    Upload a file to a S3 bucket.
+    """
+    try:
+        if object_name is None:
+            object_name = os.path.basename(file_name)
+        response = s3_client.upload_file(
+            file_name, bucket, object_name)
+    except ClientError:
+        logger.exception('Could not upload file to S3 bucket.')
+        raise
+    else:
+        return response
+    
+def list_files(bucket):
+    """
+    List files in an S3 bucket.
+    """
+    files = []
+    try:
+        response = s3_client.list_objects_v2(Bucket=bucket)
+        for item in response.get('Contents', []):
+            files.append(item['Key'])
+    except ClientError as e:
+        logging.error(e)
+        return None
+    return files
+
+    
 def main():
     """
     Main invocation function.
     """
     bucket_name = "hands-on-cloud-localstack-bucket"
+    output_folder = "/Users/hasaniperera/crypto-ETL-pipeline/output"  
+
     logger.info('Creating S3 bucket locally using LocalStack...')
     s3 = create_bucket(bucket_name)
-    logger.info('S3 bucket created.')
+    logger.info('S3 bucket created.')    
+
+# Iterate through each file in the output folder
+    for filename in os.listdir(output_folder):
+        file_path = os.path.join(output_folder, filename)
+        
+        # Check if it's a file and not a directory
+        if os.path.isfile(file_path):
+            logger.info(f'Uploading file {file_path} to S3 bucket...')
+            upload_response = upload_file(file_path, bucket_name)
+            logger.info('File uploaded.')
+
+# List files in the bucket
+    logger.info('Listing files in S3 bucket...')
+    files = list_files(bucket_name)
+    for file in files:
+        print(file)
+
     logger.info(json.dumps(s3, indent=4) + '\n')
 
 if __name__ == '__main__':

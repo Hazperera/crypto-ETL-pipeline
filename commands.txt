@@ -2,6 +2,7 @@
 
 -- Build the Docker Image
 docker build -t my-docker-image-name .
+docker build -t my-docker-image-name ./docker_folder_name
 docker-compose build
 
 -- Verify
@@ -15,6 +16,7 @@ docker run -v df-bq-crypto-sa.json -e GOOGLE_APPLICATION_CREDENTIALS=/Users/hasa
 
 -- Fetch Logs
 docker logs my-etl-container
+
 
 
 

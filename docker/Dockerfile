@@ -7,7 +7,7 @@ RUN pip install poetry
 COPY . /app
 
 # Copy AWS credentials JSON file
-COPY aws_credentials.json /app/aws_credentials.json
+COPY ../credentials/aws_credentials.json /app/aws_credentials.json
 
 # Set working directory
 WORKDIR /app
@@ -19,12 +19,13 @@ RUN poetry config virtualenvs.create false && \
 
 # Read AWS credentials from JSON file and set environment variables
 RUN pip install jq
-RUN echo $(jq -r '.AWS_ACCESS_KEY_ID' /app/aws_credentials.json) > /app/AWS_ACCESS_KEY_ID
-RUN echo $(jq -r '.AWS_SECRET_ACCESS_KEY' /app/aws_credentials.json) > /app/AWS_SECRET_ACCESS_KEY
+RUN AWS_ACCESS_KEY_ID=$(jq -r '.AWS_ACCESS_KEY_ID' /app/aws_credentials.json) \
+    && AWS_SECRET_ACCESS_KEY=$(jq -r '.AWS_SECRET_ACCESS_KEY' /app/aws_credentials.json)
 
 # Set environment variables for AWS
-ENV AWS_ACCESS_KEY_ID=$(cat /app/AWS_ACCESS_KEY_ID)
-ENV AWS_SECRET_ACCESS_KEY=$(cat /app/AWS_SECRET_ACCESS_KEY)
+ENV AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+ENV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+
 
 # Run the script
 CMD ["poetry", "run", "python", "src/crypto_datapipeline_executor.py"]

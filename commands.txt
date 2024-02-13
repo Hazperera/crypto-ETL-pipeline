@@ -14,4 +14,34 @@ docker run -v df-bq-crypto-sa.json -e GOOGLE_APPLICATION_CREDENTIALS=/Users/hasa
 -- Fetch Logs
 docker logs my-etl-container
 
+-- Start LocalStack
+localstack start
 
+-- Stop LocalStack
+localstack stop
+
+-- Configure Environment Variables in Linux
+echo 'LOCALSTACK_ENDPOINT_URL="http://localhost:4566"' >> $HOME/.bash_profile
+
+
+-- Configure AWS CLI
+aws configure --profile localstack
+AWS Access Key ID [None]: test
+AWS Secret Access Key [None]: test
+Default region name [None]: us-east-1
+Default output format [None]:
+
+-- Verify LocalStack configuration
+aws --endpoint-url=$LOCALSTACK_ENDPOINT_URL s3 ls 
+
+-- Alias on Mac/ Linux
+alias awsls="aws --endpoint-url=$LOCALSTACK_ENDPOINT_URL"
+
+
+-- Create an S3 bucket using AWS CLI in LocalStack
+awsls s3api create-bucket --bucket hands-on-cloud-localstack-bucket
+
+-- List S3 buckets in LocalStack
+awsls s3 ls
+
+-- Configure AWS CDK (Python Boto3 library)

@@ -51,3 +51,8 @@ awsls s3 ls
 
 -- Verify S3 bucket creation
 awsls s3 ls
+
+-- Schedule using CRON Jobs
+crontab -e
+0 1 * * * /anaconda3/bin/python /Users/hasaniperera/crypto-ETL-pipeline/src/pipeline_executor.py
+crontab -l

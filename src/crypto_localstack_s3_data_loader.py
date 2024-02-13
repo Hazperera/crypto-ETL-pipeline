@@ -4,9 +4,12 @@ from botocore.exceptions import ClientError
 import json
 import os
 
-AWS_REGION = 'us-east-1'
-AWS_PROFILE = 'localstack'
-ENDPOINT_URL = os.environ.get('LOCALSTACK_ENDPOINT_URL')
+AWS_REGION = 'eu-west-1'
+AWS_PROFILE = 'hasa-dev'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+ENDPOINT_URL = None
+# ENDPOINT_URL = os.environ.get('LOCALSTACK_ENDPOINT_URL')
 # print("Endpoint URL:", ENDPOINT_URL)
 
 # logger config
@@ -15,25 +18,30 @@ logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s: %(levelname)s: %(message)s')
 boto3.setup_default_session(profile_name=AWS_PROFILE)
 
-s3_client = boto3.client("s3", region_name=AWS_REGION,
-                         endpoint_url=ENDPOINT_URL)
+# S3 bucket name
+BUCKET_NAME = 'hasa-dev-218084585641'
 
-def create_bucket(bucket_name, region_name=None):
-    """
-    Creates an S3 bucket.
-    """
-    try:
-        if region_name is None or region_name == 'us-east-1':
-            response = s3_client.create_bucket(Bucket=bucket_name)
-        else:
-            response = s3_client.create_bucket(
-                Bucket=bucket_name,
-                CreateBucketConfiguration={'LocationConstraint': region_name})
-    except ClientError:
-        logger.exception('Could not create S3 bucket locally.')
-        raise
-    else:
-        return response
+# Initialize S3 client
+s3_client = boto3.client('s3', aws_access_key_id=AWS_ACCESS_KEY_ID,
+                         aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+                         region_name=AWS_REGION,endpoint_url=ENDPOINT_URL)
+
+# def create_bucket(bucket_name, region_name=None):
+#     """
+#     Creates an S3 bucket.
+#     """
+#     try:
+#         if region_name is None or region_name == 'us-east-1':
+#             response = s3_client.create_bucket(Bucket=bucket_name)
+#         else:
+#             response = s3_client.create_bucket(
+#                 Bucket=bucket_name,
+#                 CreateBucketConfiguration={'LocationConstraint': region_name})
+#     except ClientError:
+#         logger.exception('Could not create S3 bucket locally.')
+#         raise
+#     else:
+#         return response
 
 def upload_file(file_name, bucket, object_name=None):
     """
@@ -69,12 +77,13 @@ def main():
     """
     Main invocation function.
     """
-    bucket_name = "hands-on-cloud-localstack-bucket"
+    bucket_name = BUCKET_NAME
     output_folder = "/Users/hasaniperera/crypto-ETL-pipeline/output"  
 
-    logger.info('Creating S3 bucket locally using LocalStack...')
-    s3 = create_bucket(bucket_name)
-    logger.info('S3 bucket created.')    
+    # logger.info('Creating S3 bucket locally using LocalStack...')
+    # s3 = create_bucket(bucket_name)
+    # logger.info('S3 bucket created.')    
+    # logger.info(json.dumps(s3, indent=4) + '\n')
 
 # Iterate through each file in the output folder
     for filename in os.listdir(output_folder):
@@ -92,7 +101,6 @@ def main():
     for file in files:
         print(file)
 
-    logger.info(json.dumps(s3, indent=4) + '\n')
 
 if __name__ == '__main__':
     main()

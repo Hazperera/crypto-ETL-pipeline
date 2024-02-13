@@ -7,14 +7,22 @@ import os
 AWS_REGION = 'us-east-1'
 AWS_PROFILE = 'localstack'
 ENDPOINT_URL = os.environ.get('LOCALSTACK_ENDPOINT_URL')
+# print("Endpoint URL:", ENDPOINT_URL)
 
 # logger config
 logger = logging.getLogger()
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s: %(levelname)s: %(message)s')
 boto3.setup_default_session(profile_name=AWS_PROFILE)
-s3_client = boto3.client("s3", region_name=AWS_REGION,
-                         endpoint_url=ENDPOINT_URL)
+# s3_client = boto3.client("s3", region_name=AWS_REGION,
+#                          endpoint_url=ENDPOINT_URL)
+
+######## Hardcoded Credentials (Temporary Test) ########
+s3_client = boto3.client('s3', region_name=AWS_REGION, 
+                         endpoint_url=ENDPOINT_URL, 
+                         aws_access_key_id='test', 
+                         aws_secret_access_key='test')
+
 
 def create_bucket(bucket_name):
     """
@@ -22,7 +30,8 @@ def create_bucket(bucket_name):
     """
     try:
         response = s3_client.create_bucket(
-            Bucket=bucket_name)
+            Bucket=bucket_name,
+    CreateBucketConfiguration={'LocationConstraint': AWS_REGION})
     except ClientError:
         logger.exception('Could not create S3 bucket locally.')
         raise

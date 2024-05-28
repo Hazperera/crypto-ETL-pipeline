@@ -1,3 +1,4 @@
+
 # Crypto-ETL-Data Pipeline 
 
 ## Setup and Run Data Pipeline:
@@ -43,5 +44,3 @@
 ## System Architecture Diagram:
 
 ![Draft Workflow](images/sys_architecture_diagram.png)
-
-

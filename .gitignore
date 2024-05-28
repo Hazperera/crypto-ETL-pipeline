@@ -1,0 +1,8 @@
+.DS_Store
+
+# Byte-compile / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+credentials/*
+credentials/

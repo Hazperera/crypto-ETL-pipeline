@@ -1,0 +1,59 @@
+--DOCKER
+
+-- Build the Docker Image
+docker build -t my-docker-image-name .
+docker build -t my-docker-image-name ./docker_folder_name
+docker-compose build
+
+-- Verify
+docker images
+
+-- Run the Docker Container
+--docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+docker-compose up
+docker run -v df-bq-crypto-sa.json -e GOOGLE_APPLICATION_CREDENTIALS=/Users/hasaniperera/D......df-bq-crypto-sa.json my-docker-image-name
+
+-- Fetch Logs
+docker logs my-etl-container
+
+
+
+
+--LOCALSTACK
+
+-- Start LocalStack
+localstack start
+
+-- Stop LocalStack
+localstack stop
+
+-- Configure Environment Variables in Linux
+echo 'LOCALSTACK_ENDPOINT_URL="http://localhost:4566"' >> $HOME/.bash_profile
+
+-- Configure AWS CLI
+aws configure --profile localstack
+AWS Access Key ID [None]: test
+AWS Secret Access Key [None]: test
+Default region name [None]: us-east-1
+Default output format [None]:
+
+-- Verify LocalStack configuration
+aws --endpoint-url=$LOCALSTACK_ENDPOINT_URL s3 ls 
+
+-- Alias on Mac/ Linux
+alias awsls="aws --endpoint-url=$LOCALSTACK_ENDPOINT_URL"
+
+-- List objects a from a bucket 
+aws --endpoint-url=$LOCALSTACK_ENDPOINT_URL s3 ls s3://your-bucket-name
+
+
+-- Create an S3 bucket using AWS CLI in LocalStack
+awsls s3api create-bucket --bucket your-bucket-name
+
+-- List S3 buckets in your profile
+aws s3 ls
+
+
+
+

@@ -43,4 +43,4 @@
      
 ## System Architecture Diagram:
 
-![Draft Workflow](images/sys_architecture_diagram.png)
+Draft Workflow](images/sys_architecture_diagram.png)

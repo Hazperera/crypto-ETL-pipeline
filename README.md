@@ -67,7 +67,6 @@ This repository contains a data pipeline that processes cryptocurrency data usin
      ```bash
      python crypto_datapipeline_executor.py
      ```
-
 ### Running on the Cloud
 
 1. **Set up your environment**: Ensure your cloud environment is configured correctly with the necessary credentials and permissions.
@@ -86,12 +85,3 @@ This repository contains a data pipeline that processes cryptocurrency data usin
 
 ### Logging
 All scripts use Python's built-in logging module to log information and errors. Logs include timestamps, log levels, and messages.
-
-
-
-
-
-
-
-
-

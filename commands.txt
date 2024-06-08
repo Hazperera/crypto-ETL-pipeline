@@ -17,6 +17,15 @@ docker run -v df-bq-crypto-sa.json -e GOOGLE_APPLICATION_CREDENTIALS=/Users/hasa
 -- Fetch Logs
 docker logs my-etl-container
 
+-- POETRY
+-- Initialize Poetry in your project:
+poetry init
+
+-- Create a Poetry shell (virtual environment)
+poetry shell
+
+-- Add packages
+poetry add
 
 
 

@@ -1,0 +1,40 @@
+[0m22:04:47.858962 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8bd0992fa0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8be2b92700>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8be2bbeb50>]}
+
+
+============================== 22:04:47.862500 | ab059f15-9bb6-4992-b8b3-aadf4c80aed8 ==============================
+[0m22:04:47.862500 [info ] [MainThread]: Running with dbt=1.7.6
+[0m22:04:47.863043 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'debug': 'False', 'profiles_dir': '/Users/hasaniperera/.dbt', 'log_path': 'logs', 'version_check': 'True', 'fail_fast': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'introspect': 'True', 'static_parser': 'True', 'invocation_command': 'dbt init zilliqa_project', 'target_path': 'None', 'log_format': 'default', 'send_anonymous_usage_stats': 'True'}
+[0m22:04:47.864114 [debug] [MainThread]: Starter project path: /Users/hasaniperera/opt/anaconda3/lib/python3.8/site-packages/dbt/include/starter_project
+[0m22:04:47.870039 [info ] [MainThread]: 
+Your new dbt project "zilliqa_project" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m22:04:47.870494 [info ] [MainThread]: Setting up your profile.
+[0m22:14:34.351164 [info ] [MainThread]: Profile zilliqa_project written to /Users/hasaniperera/.dbt/profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m22:14:34.354130 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 586.5932, "process_user_time": 2.569847, "process_kernel_time": 0.342275, "process_mem_max_rss": "197984256", "process_in_blocks": "0", "process_out_blocks": "0"}
+[0m22:14:34.356003 [debug] [MainThread]: Command `dbt init` succeeded at 22:14:34.355308 after 586.60 seconds
+[0m22:14:34.357213 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8bd0992fa0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8be4d948b0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8be2bc8f70>]}
+[0m22:14:34.358084 [debug] [MainThread]: Flushing usage events
+[0m22:16:39.438537 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8a09a71eb0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8a0b046850>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8a0b017d90>]}
+
+
+============================== 22:16:39.441728 | be3419ba-1eb4-468c-9eab-a9a3bf969a36 ==============================
+[0m22:16:39.441728 [info ] [MainThread]: Running with dbt=1.7.6
+[0m22:16:39.442259 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'fail_fast': 'False', 'version_check': 'True', 'log_path': 'logs', 'profiles_dir': '/Users/hasaniperera/.dbt', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'default', 'invocation_command': 'dbt init zilliqa_project', 'introspect': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'target_path': 'None', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m22:16:39.443181 [info ] [MainThread]: A project called zilliqa_project already exists here.
+[0m22:16:39.444687 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 0.04979879, "process_user_time": 1.308267, "process_kernel_time": 0.103133, "process_mem_max_rss": "98365440", "process_in_blocks": "0", "process_out_blocks": "0"}
+[0m22:16:39.445384 [debug] [MainThread]: Command `dbt init` succeeded at 22:16:39.445128 after 0.05 seconds
+[0m22:16:39.445768 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8a09a71eb0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8a0b046850>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8a0b07e280>]}
+[0m22:16:39.446123 [debug] [MainThread]: Flushing usage events

@@ -1,9 +1,0 @@
-__pycache__
-.git
-.env
-.venv
-node_modules
-*.pyc
-*.pyo
-*.pyd
-credentials/

@@ -1,4 +1,5 @@
 
+-- Block Creation Rate
 SELECT
   DATE_TRUNC(timestamp, DAY) AS day,
   COUNT(*) AS blocks_created

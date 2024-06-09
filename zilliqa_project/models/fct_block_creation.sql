@@ -1,5 +1,7 @@
 
--- models/fact_block_creation.sql
+-- models/fct_block_creation.sql
+
+-- Block Creation Rate
 
 WITH ds_block_metrics AS (
   SELECT

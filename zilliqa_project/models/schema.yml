@@ -3,6 +3,27 @@ version: 2
 
 models:
   - name: fct_block_creation
-    description: "A model for key metrics"
+    description: "A model to Measure the number of blocks created over time"
     config:
-      materialized: table
+      materialized: view
+  
+  - name: fct_transact_vol
+    description: "A model to Track number of transactions over time"
+    config:
+      materialized: view
+
+  - name: dim_transactions.sql
+    description: "A model to Track Transactions infomation"
+    config:
+      materialized: view
+
+  - name: dim_transactions_gas.sql
+    description: "A model to Track the Gas and Fees Information of Transactions"
+    config:
+      materialized: view
+
+  - name: dim_transactions_participants.sql
+    description: "A model to Track participant's information"
+    config:
+      materialized: view
+

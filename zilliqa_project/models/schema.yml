@@ -1,0 +1,8 @@
+
+version: 2
+
+models:
+  - name: fct_block_creation
+    description: "A model for key metrics"
+    config:
+      materialized: table

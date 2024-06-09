@@ -1,0 +1,237 @@
+
+SELECT
+  DATE_TRUNC(timestamp, DAY) AS day,
+  COUNT(*) AS blocks_created
+FROM
+  `bigquery-public-data.crypto_zilliqa.ds_blocks`
+GROUP BY
+  day
+ORDER BY
+  day
+
+
+SELECT
+  DATE_TRUNC(timestamp, DAY) AS day,
+  COUNT(*) AS blocks_created
+FROM
+  `bigquery-public-data.crypto_zilliqa.tx_blocks`
+GROUP BY
+  day
+ORDER BY
+  day
+
+-- Average Block Size: Calculates the average block size over time
+
+SELECT
+  DATE_TRUNC(timestamp, DAY) AS day,
+  AVG(size) AS avg_block_size
+FROM
+  `bigquery-public-data.crypto_zilliqa.ds_blocks`
+GROUP BY
+  day
+ORDER BY
+  day
+
+SELECT
+  DATE_TRUNC(timestamp, DAY) AS day,
+  AVG(size) AS avg_block_size
+FROM
+  `bigquery-public-data.crypto_zilliqa.tx_blocks`
+GROUP BY
+  day
+ORDER BY
+  day
+
+-- Block Time Consistency: Measures the consistency of block creation times
+
+SELECT
+  DATE_TRUNC(timestamp, HOUR) AS hour,
+  COUNT(*) AS blocks_created
+FROM
+  `bigquery-public-data.crypto_zilliqa.tx_blocks`
+GROUP BY
+  hour
+ORDER BY
+  hour
+
+
+
+
+-- Events Emitted by Smart Contracts: Tracks the number of events emitted by smart contracts over time
+
+SELECT
+  DATE_TRUNC(timestamp, DAY) AS day,
+  COUNT(*) AS event_count
+FROM
+  `bigquery-public-data.crypto_zilliqa.event_logs`
+GROUP BY
+  day
+ORDER BY
+  day
+
+
+SELECT
+  DATE_TRUNC(timestamp, DAY) AS day,
+  COUNT(*) AS transaction_count
+FROM
+  `bigquery-public-data.crypto_zilliqa.transactions`
+GROUP BY
+  day
+ORDER BY
+  day
+
+
+
+
+
+
+-- Average Transaction Fee: Calculates the average transaction fee over time
+SELECT
+  DATE_TRUNC(timestamp, DAY) AS day,
+  AVG(gas_price * gas_used) AS avg_transaction_fee
+FROM
+  `bigquery-public-data.crypto_zilliqa.transactions`
+WHERE
+  gas_price IS NOT NULL AND gas_used IS NOT NULL
+GROUP BY
+  day
+ORDER BY
+  day
+
+-- Transaction Success Rate: Measures the rate of successful transactions over time
+
+WITH total_transactions AS (
+  SELECT
+    DATE_TRUNC(timestamp, DAY) AS day,
+    COUNT(*) AS total
+  FROM
+    `bigquery-public-data.crypto_zilliqa.transactions`
+  GROUP BY
+    day
+),
+failed_transactions AS (
+  SELECT
+    DATE_TRUNC(timestamp, DAY) AS day,
+    COUNT(*) AS failed
+  FROM
+    `bigquery-public-data.crypto_zilliqa.exceptions`
+  GROUP BY
+    day
+)
+SELECT
+  t.day,
+  (1 - IFNULL(f.failed, 0) / t.total) * 100 AS success_rate
+FROM
+  total_transactions t
+LEFT JOIN
+  failed_transactions f
+ON
+  t.day = f.day
+ORDER BY
+  t.day
+
+
+-- Network Efficiency
+
+-- Transaction Throughput (TPS): Measures the number of transactions processed per second
+
+SELECT
+  DATE_TRUNC(timestamp, MINUTE) AS minute,
+  COUNT(*) / 60.0 AS tps
+FROM
+  `bigquery-public-data.crypto_zilliqa.transactions`
+GROUP BY
+  minute
+ORDER BY
+  minute
+
+-- Average Transaction Fee: Calculates the average fee paid per transaction
+
+SELECT
+  DATE_TRUNC(timestamp, DAY) AS day,
+  AVG(gas_price * gas_used) AS avg_transaction_fee
+FROM
+  `bigquery-public-data.crypto_zilliqa.transactions`
+WHERE
+  gas_price IS NOT NULL AND gas_used IS NOT NULL
+GROUP BY
+  day
+ORDER BY
+  day
+
+-- Transaction Latency: Measures the time taken for a transaction to be included in a block
+
+SELECT
+  tx.transaction_hash,
+  tx.timestamp AS transaction_time,
+  blk.timestamp AS block_time,
+  TIMESTAMP_DIFF(blk.timestamp, tx.timestamp, SECOND) AS latency_seconds
+FROM
+  `bigquery-public-data.crypto_zilliqa.transactions` AS tx
+JOIN
+  `bigquery-public-data.crypto_zilliqa.tx_blocks` AS blk
+ON
+  tx.block_number = blk.block_number
+ORDER BY
+  latency_seconds
+
+-- Network Decentralization
+
+-- Distribution of Block Producers: Measures the distribution of block producers to gauge decentralization.
+
+SELECT
+  producer,
+  COUNT(*) AS blocks_produced
+FROM
+  `bigquery-public-data.crypto_zilliqa.tx_blocks`
+GROUP BY
+  producer
+ORDER BY
+  blocks_produced DESC
+
+
+
+
+
+-- Node Uptime: Measures the uptime of nodes participating in the network
+
+-- SELECT
+--   producer,
+--   COUNT(*) AS blocks_produced,
+--   COUNT(DISTINCT DATE_TRUNC(timestamp, DAY)) AS active_days
+-- FROM
+--   `bigquery-public-data.crypto_zilliqa.tx_blocks`
+-- GROUP BY
+--   producer
+-- ORDER BY
+--   active_days DESC
+
+
+-- Node Geographical Distribution: Analyzes the geographical distribution of nodes (if location data is available).
+-- Gini Coefficient of Block Production: Measures the inequality in block production among nodes.
+
+-- WITH block_counts AS (
+--   SELECT
+--     producer,
+--     COUNT(*) AS blocks_produced
+--   FROM
+--     `bigquery-public-data.crypto_zilliqa.tx_blocks`
+--   GROUP BY
+--     producer
+-- ),
+-- total_blocks AS (
+--   SELECT
+--     SUM(blocks_produced) AS total
+--   FROM
+--     block_counts
+-- )
+-- SELECT
+--   producer,
+--   blocks_produced,
+--   blocks_produced / total AS proportion
+-- FROM
+--   block_counts, total_blocks
+-- ORDER BY
+--   proportion DESC
+
+-- Transaction Volume: Tracks the number of transactions over time
